@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro - Essência Beauty</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body class="cadastro-page">
+
+<header>
+  <a href="index.html" class="voltar-link" aria-label="Voltar ao início">&larr;</a>
+  <h1>Essência Beauty</h1>
+  <p>Cadastro de Cliente</p>
+</header>
+
+<main class="cadastro-container">
+
+  <div class="cadastro-card">
+
+    <div class="cadastro-header">
+      <h2>Crie sua conta</h2>
+      <p>Preencha seus dados para se cadastrar</p>
+    </div>
+
+    <form id="formCadastro" novalidate>
+
+      <!-- NOME COMPLETO -->
+      <div class="campo">
+        <label for="nomeCompleto">Nome completo <span class="obrigatorio">*</span></label>
+        <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" autocomplete="name">
+        <span class="erro-campo" id="erroNome"></span>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="campo">
+        <label for="emailCadastro">Email <span class="obrigatorio">*</span></label>
+        <input type="email" id="emailCadastro" placeholder="seu@email.com" autocomplete="email">
+        <span class="erro-campo" id="erroEmail"></span>
+      </div>
+
+      <!-- TELEFONE -->
+      <div class="campo">
+        <label for="telefone">Telefone <span class="obrigatorio">*</span></label>
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+        <span class="erro-campo" id="erroTelefone"></span>
+      </div>
+
+      <!-- DATA DE NASCIMENTO -->
+      <div class="campo">
+        <label for="dataNascimento">Data de nascimento <span class="obrigatorio">*</span></label>
+        <input type="date" id="dataNascimento">
+        <span class="erro-campo" id="erroData"></span>
+      </div>
+
+      <!-- GÊNERO -->
+      <div class="campo">
+        <label>Gênero</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="genero" value="feminino" checked>
+            <span>Feminino</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="genero" value="masculino">
+            <span>Masculino</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="genero" value="outro">
+            <span>Outro</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- TIPO DE PELE -->
+      <div class="campo">
+        <label for="tipoPele">Tipo de pele</label>
+        <select id="tipoPele">
+          <option value="">Selecione...</option>
+          <option value="normal">Normal</option>
+          <option value="seca">Seca</option>
+          <option value="oleosa">Oleosa</option>
+          <option value="mista">Mista</option>
+          <option value="sensivel">Sensível</option>
+        </select>
+      </div>
+
+      <!-- INTERESSES -->
+      <div class="campo">
+        <label>Interesses</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="interesses" value="perfumes">
+            <span>Perfumes</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interesses" value="maquiagem">
+            <span>Maquiagem</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interesses" value="skincare">
+            <span>Cuidados com a pele</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interesses" value="cabelos">
+            <span>Cabelos</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- TERMOS -->
+      <div class="campo termos-campo">
+        <label class="checkbox-label">
+          <input type="checkbox" id="termos">
+          <span>Aceito receber novidades e ofertas por email</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-cadastrar" id="btnCadastrar">Cadastrar</button>
+
+    </form>
+
+    <!-- MENSAGEM DE RESULTADO -->
+    <div id="resultadoCadastro" class="resultado-cadastro"></div>
+
+    <!-- LISTA DE CADASTROS -->
+    <div id="listaCadastros" class="lista-cadastros">
+      <h3>Cadastros realizados</h3>
+      <div id="cadastrosContainer"></div>
+      <p id="semCadastros" class="sem-cadastros">Nenhum cadastro realizado ainda.</p>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Essência Beauty - Todos os direitos reservados</p>
+</footer>
+
+<script src="cadastro.js"></script>
+
+</body>
+</html>
