@@ -1,49 +1,80 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("Site funcionando 🔥");
+    console.log("Site funcionando!");
 
     // =========================
     // MENU LATERAL
     // =========================
-    let menuBtn = document.getElementById("menuBtn");
-    let menu = document.getElementById("menuLateral");
+    var menuBtn = document.getElementById("menuBtn");
+    var menu = document.getElementById("menuLateral");
+    var menuOverlay = document.getElementById("menuOverlay");
+    var menuClose = document.getElementById("menuClose");
+
+    function abrirMenu() {
+        menu.classList.add("aberto");
+        menuOverlay.classList.add("ativo");
+    }
+
+    function fecharMenu() {
+        menu.classList.remove("aberto");
+        menuOverlay.classList.remove("ativo");
+    }
 
     menuBtn.onclick = function () {
-        menu.style.left = (menu.style.left === "0px") ? "-200px" : "0px";
-    };
-
-    // =========================
-    // CADASTRO
-    // =========================
-    let form = document.querySelector(".cadastro");
-    let msg = document.getElementById("mensagemCadastro");
-
-    form.onsubmit = function (e) {
-        e.preventDefault();
-
-        let nome = document.getElementById("nome").value;
-        let email = document.getElementById("email").value;
-
-        if (nome === "" || email === "") {
-            msg.textContent = "Preencha tudo!";
-            msg.style.color = "red";
-            return;
+        if (menu.classList.contains("aberto")) {
+            fecharMenu();
+        } else {
+            abrirMenu();
         }
-
-        msg.textContent = "Cadastro feito!";
-        msg.style.color = "green";
-
-        form.reset();
     };
+
+    menuClose.onclick = fecharMenu;
+    menuOverlay.onclick = fecharMenu;
+
+    // Fechar menu ao clicar nos links
+    var links = document.querySelectorAll("#menuLateral a");
+    links.forEach(function (link) {
+        link.addEventListener("click", fecharMenu);
+    });
+
+    // =========================
+    // CADASTRO - VALIDAÇÃO
+    // =========================
+    var form = document.querySelector(".cadastro");
+    var msg = document.getElementById("mensagemCadastro");
+
+    if (form && msg) {
+        form.onsubmit = function (e) {
+            e.preventDefault();
+
+            var nome = document.getElementById("nome").value.trim();
+            var email = document.getElementById("email").value.trim();
+
+            if (nome === "" || email === "") {
+                msg.textContent = "Preencha todos os campos!";
+                msg.style.color = "#e74c3c";
+                return;
+            }
+
+            msg.textContent = "Cadastro realizado com sucesso!";
+            msg.style.color = "#27ae60";
+
+            form.reset();
+            var diaEl = document.getElementById("dia");
+            var mesEl = document.getElementById("mes");
+            if (diaEl) diaEl.innerText = "";
+            if (mesEl) mesEl.innerText = "";
+        };
+    }
 
     // =========================
     // MARCAS POR CATEGORIA
     // =========================
-    const marcas = {
+    var marcas = {
         perfumes: [
-            { nome: "O Boticário", link: "https://www.boticario.com.br" },
-            { nome: "Natura", link: "https://www.natura.com.br" },
-            { nome: "Avon", link: "https://www.avon.com.br" }
+            { nome: "O Boticário", link: "https://www.boticario.com.br/perfumes" },
+            { nome: "Natura", link: "https://www.natura.com.br/c/perfumaria" },
+            { nome: "Avon", link: "https://www.avon.com.br/c/perfumaria" }
         ],
 
         maquiagem: [
@@ -53,70 +84,71 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
 
         skincare: [
-            { nome: "La Roche-Posay", link: "https://www.laroche-posay.com.br" },
-            { nome: "Neutrogena", link: "https://www.neutrogena.com.br" },
-            { nome: "Nivea", link: "https://www.nivea.com.br" }
+            { nome: "La Roche-Posay", link: "https://www.laroche-posay.com.br/vitamina-c" },
+            { nome: "Neutrogena", link: "https://www.neutrogena.com.br/cuidado-facial" },
+            { nome: "Nivea", link: "https://www.nivea.com.br/produtos/rosto/cuidado" }
         ]
     };
 
     // =========================
-    // MOSTRAR MARCAS
+    // MOSTRAR MARCAS (DINÂMICO)
     // =========================
     function carregarMarcas(categoria) {
-
-        let container = document.getElementById("produtos");
+        var container = document.getElementById("marcasContainer");
         container.innerHTML = "";
 
         marcas[categoria].forEach(function (marca) {
-
-            container.innerHTML += `
-                <div class="card">
-                    <h2>${marca.nome}</h2>
-                    <a href="${marca.link}" target="_blank">
-                        <button>Ver site</button>
-                    </a>
-                </div>
-            `;
+            container.innerHTML += '<div class="marca-card">' +
+                '<h3>' + marca.nome + '</h3>' +
+                '<a href="' + marca.link + '" target="_blank">' +
+                '<button>Ver site</button>' +
+                '</a>' +
+                '</div>';
         });
+
+        // Scroll suave até as marcas
+        container.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     // =========================
-    // BOTÕES DAS ABAS
+    // BOTÕES DAS CATEGORIAS
     // =========================
-    let btnPerfume = document.getElementById("btnPerfume");
-    let btnMaquiagem = document.getElementById("btnMaquiagem");
-    let btnSkincare = document.getElementById("btnSkincare");
+    var btnPerfume = document.getElementById("btnPerfume");
+    var btnMaquiagem = document.getElementById("btnMaquiagem");
+    var btnSkincare = document.getElementById("btnSkincare");
 
     if (btnPerfume) {
-        btnPerfume.onclick = () => carregarMarcas("perfumes");
+        btnPerfume.onclick = function () { carregarMarcas("perfumes"); };
     }
 
     if (btnMaquiagem) {
-        btnMaquiagem.onclick = () => carregarMarcas("maquiagem");
+        btnMaquiagem.onclick = function () { carregarMarcas("maquiagem"); };
     }
 
     if (btnSkincare) {
-        btnSkincare.onclick = () => carregarMarcas("skincare");
+        btnSkincare.onclick = function () { carregarMarcas("skincare"); };
     }
 
     // =========================
-    // DATA (ATIVIDADE)
+    // DATA DE NASCIMENTO
     // =========================
-    let diaBtn = document.getElementById("diaBtn");
-    let mesBtn = document.getElementById("mesBtn");
-    let dia = document.getElementById("dia");
-    let mes = document.getElementById("mes");
-    let ano = document.getElementById("ano");
+    var diaBtn = document.getElementById("diaBtn");
+    var mesBtn = document.getElementById("mesBtn");
+    var dia = document.getElementById("dia");
+    var mes = document.getElementById("mes");
+    var ano = document.getElementById("ano");
 
+    // Gerar dia aleatório
     if (diaBtn) {
         diaBtn.onclick = function () {
             dia.innerText = Math.floor(Math.random() * 31) + 1;
         };
     }
 
+    // Alternar meses
     if (mesBtn) {
-        let meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-        let i = 0;
+        var meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+        var i = 0;
 
         mesBtn.onclick = function () {
             mes.innerText = meses[i];
@@ -124,7 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+    // Ano preenchido automaticamente
     if (ano) {
+        ano.value = new Date().getFullYear();
         ano.onclick = function () {
             ano.value = Math.floor(Math.random() * 35) + 1990;
         };
