@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essência Beauty</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <button id="menuBtn">☰</button>
+  <h1>Essência Beauty</h1>
+  <p>Beleza, cuidado e autoestima</p>
+</header>
+
+<!-- MENU -->
+<div id="menuLateral">
+  <a href="#">Início</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#contato">Contato</a>
+</div>
+
+<section class="container">
+
+<!-- CARDS (AGORA SÃO BOTÕES DE MARCAS) -->
+<div class="produtos">
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f">
+    <h2>Perfume</h2>
+    <button id="btnPerfume">Ver marcas</button>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc">
+    <h2>Cuidados com a pele</h2>
+    <button id="btnSkincare">Ver marcas</button>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+    <h2>Maquiagem</h2>
+    <button id="btnMaquiagem">Ver marcas</button>
+  </div>
+
+</div>
+
+<!-- AQUI VÃO APARECER AS MARCAS -->
+<div id="produtos"></div>
+
+<!-- CADASTRO -->
+<div class="cadastro-box">
+
+  <h2>Cadastre-se</h2>
+
+  <form class="cadastro">
+
+    <input type="text" id="nome" placeholder="Seu nome"><br><br>
+    <input type="email" id="email" placeholder="Seu email"><br><br>
+
+    <h3>Data de nascimento</h3>
+
+    <p>Dia:</p>
+    <button type="button" id="diaBtn">Escolher dia</button>
+    <span id="dia"></span>
+
+    <p>Mês:</p>
+    <button type="button" id="mesBtn">Escolher mês</button>
+    <span id="mes"></span>
+
+    <p>Ano:</p>
+    <input type="text" id="ano" readonly><br><br>
+
+    <button type="submit">Cadastrar</button>
+
+  </form>
+
+  <p id="mensagemCadastro"></p>
+
+</div>
+
+</section>
+
+<!-- CONTATO -->
+<section id="contato" style="text-align:center; margin:20px;">
+  <h2>Contato</h2>
+  <p>📞 6678900012</p>
+</section>
+
+<footer>
+  <p>© 2026 Essência Beauty</p>
+</footer>
+
+<script src="controller.js"></script>
+
+</body>
+</html>
