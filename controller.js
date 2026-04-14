@@ -43,25 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
     var form = document.querySelector(".cadastro");
     var msg = document.getElementById("mensagemCadastro");
 
-    form.onsubmit = function (e) {
-        e.preventDefault();
+    if (form && msg) {
+        form.onsubmit = function (e) {
+            e.preventDefault();
 
-        var nome = document.getElementById("nome").value.trim();
-        var email = document.getElementById("email").value.trim();
+            var nome = document.getElementById("nome").value.trim();
+            var email = document.getElementById("email").value.trim();
 
-        if (nome === "" || email === "") {
-            msg.textContent = "Preencha todos os campos!";
-            msg.style.color = "#e74c3c";
-            return;
-        }
+            if (nome === "" || email === "") {
+                msg.textContent = "Preencha todos os campos!";
+                msg.style.color = "#e74c3c";
+                return;
+            }
 
-        msg.textContent = "Cadastro realizado com sucesso!";
-        msg.style.color = "#27ae60";
+            msg.textContent = "Cadastro realizado com sucesso!";
+            msg.style.color = "#27ae60";
 
-        form.reset();
-        document.getElementById("dia").innerText = "";
-        document.getElementById("mes").innerText = "";
-    };
+            form.reset();
+            var diaEl = document.getElementById("dia");
+            var mesEl = document.getElementById("mes");
+            if (diaEl) diaEl.innerText = "";
+            if (mesEl) mesEl.innerText = "";
+        };
+    }
 
     // =========================
     // MARCAS POR CATEGORIA

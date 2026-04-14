@@ -64,6 +64,27 @@ header p {
   background: none;
 }
 
+/* LINK CADASTRE-SE */
+.cadastre-link {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: 20px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.cadastre-link:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-50%) scale(1.05);
+}
+
 /* =============================
    OVERLAY DO MENU
    ============================= */
