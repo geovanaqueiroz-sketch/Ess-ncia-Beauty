@@ -77,10 +77,10 @@ function validarTelefone(valor) {
 function validarData(valor) {
   if (!valor) return 'Informe sua data de nascimento';
   const data = new Date(valor);
+  const minDate = new Date('2009-01-01');
+  if (data < minDate) return 'A data deve ser a partir de 01/01/2009';
   const hoje = new Date();
-  const idade = hoje.getFullYear() - data.getFullYear();
-  if (idade < 13) return 'Você deve ter pelo menos 13 anos';
-  if (idade > 120) return 'Data inválida';
+  if (data > hoje) return 'Data inválida';
   return '';
 }
 
