@@ -55,30 +55,62 @@ dataInput.addEventListener('change', function () {
 // FUNÇÕES DE VALIDAÇÃO
 // =============================
 function validarNome(valor) {
-  if (!valor.trim()) return 'Informe seu nome completo';
-  if (valor.trim().length < 3) return 'O nome deve ter pelo menos 3 caracteres';
-  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(valor.trim())) return 'O nome deve conter apenas letras';
+  var nome = valor.trim();
+  if (!nome) return 'Informe seu nome completo';
+  if (nome.length < 3) return 'O nome deve ter pelo menos 3 caracteres';
+  if (nome.length > 100) return 'O nome deve ter no máximo 100 caracteres';
+  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(nome)) return 'O nome deve conter apenas letras';
+  if (/\s{2,}/.test(nome)) return 'O nome não deve conter espaços consecutivos';
+  var palavras = nome.split(/\s+/);
+  if (palavras.length < 2) return 'Informe o nome completo (nome e sobrenome)';
+  if (palavras.some(function (p) { return p.length < 2; })) return 'Cada parte do nome deve ter pelo menos 2 letras';
   return '';
 }
 
 function validarEmail(valor) {
-  if (!valor.trim()) return 'Informe seu email';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor.trim())) return 'Informe um email válido';
+  var email = valor.trim().toLowerCase();
+  if (!email) return 'Informe seu email';
+  if (email.length > 254) return 'O email deve ter no máximo 254 caracteres';
+  // Stricter regex: no leading/trailing dots, no consecutive dots, TLD >= 2 chars
+  var regexEmail = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\.[a-zA-Z]{2,}$/;
+  if (!regexEmail.test(email)) return 'Informe um email válido';
+  if (/\.{2,}/.test(email)) return 'O email não pode conter pontos consecutivos';
+  // Check for duplicate email in existing registrations
+  var duplicado = cadastros.some(function (c) { return c.email.toLowerCase() === email; });
+  if (duplicado) return 'Este email já está cadastrado';
   return '';
 }
 
 function validarTelefone(valor) {
-  const numeros = valor.replace(/\D/g, '');
+  var numeros = valor.replace(/\D/g, '');
   if (!numeros) return 'Informe seu telefone';
   if (numeros.length < 10) return 'Telefone deve ter pelo menos 10 dígitos';
+  if (numeros.length > 11) return 'Telefone deve ter no máximo 11 dígitos';
+  // Validate DDD (Brazilian area code: 11-99, cannot start with 0)
+  var ddd = parseInt(numeros.slice(0, 2), 10);
+  if (ddd < 11 || ddd > 99) return 'DDD inválido';
+  // Reject all-same-digit numbers (e.g., 0000000000)
+  if (/^(\d)\1+$/.test(numeros)) return 'Telefone inválido';
   return '';
 }
 
 function validarData(valor) {
   if (!valor) return 'Informe sua data de nascimento';
-  const data = new Date(valor);
-  const hoje = new Date();
-  const idade = hoje.getFullYear() - data.getFullYear();
+  var data = new Date(valor + 'T00:00:00');
+  // Check for invalid date (NaN)
+  if (isNaN(data.getTime())) return 'Data de nascimento inválida';
+  var hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  // Explicit future date check
+  if (data > hoje) return 'A data de nascimento não pode ser no futuro';
+  // Precise age calculation considering month and day
+  var idade = hoje.getFullYear() - data.getFullYear();
+  var mesAniversario = data.getMonth();
+  var diaAniversario = data.getDate();
+  if (hoje.getMonth() < mesAniversario ||
+      (hoje.getMonth() === mesAniversario && hoje.getDate() < diaAniversario)) {
+    idade--;
+  }
   if (idade < 13) return 'Você deve ter pelo menos 13 anos';
   if (idade > 120) return 'Data inválida';
   return '';
