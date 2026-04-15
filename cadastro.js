@@ -5,6 +5,19 @@
 // Lista de cadastros em memória
 const cadastros = [];
 
+// =============================
+// UTILITÁRIO DE SEGURANÇA
+// =============================
+function escaparHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // Elementos do DOM
 const form = document.getElementById('formCadastro');
 const nomeInput = document.getElementById('nomeCompleto');
@@ -196,12 +209,12 @@ function atualizarLista() {
     var dataNasc = c.dataNascimento ? formatarData(c.dataNascimento) : '';
 
     item.innerHTML =
-      '<div class="nome">' + (i + 1) + '. ' + c.nome + '</div>' +
+      '<div class="nome">' + (i + 1) + '. ' + escaparHTML(c.nome) + '</div>' +
       '<div class="detalhes">' +
-        c.email + ' | ' + c.telefone + '<br>' +
-        'Nascimento: ' + dataNasc + ' | Gênero: ' + capitalizarPrimeira(c.genero) + '<br>' +
-        'Pele: ' + capitalizarPrimeira(peleTxt) + ' | Interesses: ' + interessesTxt + '<br>' +
-        '<em>Registrado em ' + c.dataRegistro + '</em>' +
+        escaparHTML(c.email) + ' | ' + escaparHTML(c.telefone) + '<br>' +
+        'Nascimento: ' + escaparHTML(dataNasc) + ' | Gênero: ' + escaparHTML(capitalizarPrimeira(c.genero)) + '<br>' +
+        'Pele: ' + escaparHTML(capitalizarPrimeira(peleTxt)) + ' | Interesses: ' + escaparHTML(interessesTxt) + '<br>' +
+        '<em>Registrado em ' + escaparHTML(c.dataRegistro) + '</em>' +
       '</div>';
 
     cadastrosContainer.appendChild(item);

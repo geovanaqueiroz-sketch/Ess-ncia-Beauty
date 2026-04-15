@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
 <title>Cadastro - Essência Beauty</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="cadastro.css">
@@ -31,21 +32,21 @@
       <!-- NOME COMPLETO -->
       <div class="campo">
         <label for="nomeCompleto">Nome completo <span class="obrigatorio">*</span></label>
-        <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" autocomplete="name">
+        <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" autocomplete="name" maxlength="100">
         <span class="erro-campo" id="erroNome"></span>
       </div>
 
       <!-- EMAIL -->
       <div class="campo">
         <label for="emailCadastro">Email <span class="obrigatorio">*</span></label>
-        <input type="email" id="emailCadastro" placeholder="seu@email.com" autocomplete="email">
+        <input type="email" id="emailCadastro" placeholder="seu@email.com" autocomplete="email" maxlength="254">
         <span class="erro-campo" id="erroEmail"></span>
       </div>
 
       <!-- TELEFONE -->
       <div class="campo">
         <label for="telefone">Telefone <span class="obrigatorio">*</span></label>
-        <input type="tel" id="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" autocomplete="tel" maxlength="15">
         <span class="erro-campo" id="erroTelefone"></span>
       </div>
 
