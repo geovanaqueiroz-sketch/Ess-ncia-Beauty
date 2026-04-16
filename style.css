@@ -461,6 +461,95 @@ button:hover {
 }
 
 /* =============================
+   PROMOÇÕES
+   ============================= */
+.promocoes {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.promo-card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  animation: fadeIn 0.4s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.25);
+}
+
+.promo-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #ff1493, #d63384);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 8px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(214, 51, 132, 0.4);
+  z-index: 1;
+}
+
+.promo-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.promo-info {
+  padding: 18px 20px 22px;
+}
+
+.promo-info h3 {
+  color: #d63384;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.promo-desc {
+  color: #777;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.promo-precos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preco-antigo {
+  color: #aaa;
+  text-decoration: line-through;
+  font-size: 0.95rem;
+}
+
+.preco-novo {
+  color: #d63384;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.promo-aviso {
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 25px;
+}
+
+/* =============================
    FOOTER
    ============================= */
 footer {
@@ -475,8 +564,43 @@ footer {
    RESPONSIVO (CELULAR)
    ============================= */
 @media (max-width: 768px) {
+  header {
+    padding: 20px 15px 15px;
+  }
+
   header h1 {
     font-size: 1.5rem;
+    margin-bottom: 3px;
+  }
+
+  header p {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  #menuBtn {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    transform: none;
+    font-size: 24px;
+  }
+
+  #menuBtn:hover {
+    transform: scale(1.2);
+  }
+
+  .cadastre-link {
+    position: static;
+    display: inline-block;
+    transform: none;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    padding: 7px 16px;
+  }
+
+  .cadastre-link:hover {
+    transform: scale(1.05);
   }
 
   .container {
@@ -504,5 +628,15 @@ footer {
 
   .section-title {
     font-size: 1.4rem;
+  }
+
+  .promocoes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .promo-card {
+    width: 90%;
+    max-width: 350px;
   }
 }
