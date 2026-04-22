@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("Site funcionando!");
-
     // =========================
     // MENU LATERAL
     // =========================
@@ -98,12 +96,24 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML = "";
 
         marcas[categoria].forEach(function (marca) {
-            container.innerHTML += '<div class="marca-card">' +
-                '<h3>' + marca.nome + '</h3>' +
-                '<a href="' + marca.link + '" target="_blank">' +
-                '<button>Ver site</button>' +
-                '</a>' +
-                '</div>';
+            var card = document.createElement("div");
+            card.className = "marca-card";
+
+            var h3 = document.createElement("h3");
+            h3.textContent = marca.nome;
+            card.appendChild(h3);
+
+            var link = document.createElement("a");
+            link.href = marca.link;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+
+            var btn = document.createElement("button");
+            btn.textContent = "Ver site";
+            link.appendChild(btn);
+            card.appendChild(link);
+
+            container.appendChild(card);
         });
 
         // Scroll suave até as marcas
