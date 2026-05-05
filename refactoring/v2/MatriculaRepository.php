@@ -42,6 +42,7 @@ class MatriculaRepository implements IMatriculaRepository
         }
 
         $aluno = new AlunoModel();
+        $aluno->setId((int)$row['id']);
         $aluno->setNome($row['nome']);
         $aluno->setIdade((int)$row['idade']);
         $aluno->setCurso($row['curso']);

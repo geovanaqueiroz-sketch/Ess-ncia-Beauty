@@ -2,19 +2,21 @@
 
 /**
  * Middleware - Validacao e sanitizacao dos dados de entrada.
- * Aplica filter_input para barrar tentativas de XSS na rota POST.
+ * Aplica sanitizacao com strip_tags e filter_var para barrar XSS na rota POST.
  */
 class Middleware
 {
     /**
      * Sanitiza e valida os dados do formulario.
-     * Usa filter_input para barrar XSS e validar campos.
+     * Usa o parametro $dados (ao inves de ler direto do superglobal) para
+     * manter testabilidade. Aplica strip_tags para remover tags HTML/script
+     * sem causar double-encoding (a view ja usa htmlspecialchars na saida).
      */
     public static function validar(array $dados): array
     {
-        $nome  = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-        $idade = filter_input(INPUT_POST, 'idade', FILTER_SANITIZE_NUMBER_INT);
-        $curso = filter_input(INPUT_POST, 'curso', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nome  = isset($dados['nome']) ? strip_tags(trim($dados['nome'])) : '';
+        $idade = isset($dados['idade']) ? filter_var($dados['idade'], FILTER_SANITIZE_NUMBER_INT) : '';
+        $curso = isset($dados['curso']) ? strip_tags(trim($dados['curso'])) : '';
 
         if (empty($nome) || empty($idade) || empty($curso)) {
             self::encerrarComAviso("Todos os campos sao obrigatorios. Preencha Nome, Idade e Curso.");
@@ -34,9 +36,9 @@ class Middleware
         }
 
         return [
-            'nome'  => trim($nome),
+            'nome'  => $nome,
             'idade' => $idadeInt,
-            'curso' => trim($curso),
+            'curso' => $curso,
         ];
     }
 
