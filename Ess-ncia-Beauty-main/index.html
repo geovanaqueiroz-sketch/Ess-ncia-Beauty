@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essência Beauty</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <button id="menuBtn" aria-label="Abrir menu">&#9776;</button>
+  <h1>Essência Beauty</h1>
+  <p>Beleza, cuidado e autoestima</p>
+  <a href="cadastro.html" class="cadastre-link">Cadastre-se</a>
+</header>
+
+<!-- OVERLAY DO MENU -->
+<div id="menuOverlay"></div>
+
+<!-- MENU LATERAL -->
+<div id="menuLateral">
+  <button id="menuClose" aria-label="Fechar menu">&times;</button>
+  <a href="#">Início</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#promocoes">Promoções</a>
+  <a href="cadastro.html">Cadastro</a>
+  <a href="#contato">Contato</a>
+</div>
+
+<!-- SEÇÃO PRINCIPAL -->
+<section class="container" id="produtos">
+
+  <h2 class="section-title">Nossos Produtos</h2>
+
+  <!-- CARDS DE CATEGORIAS -->
+  <div class="produtos">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=300&fit=crop" alt="Perfume">
+      <h2>Perfume</h2>
+      <p class="card-desc">Fragrâncias que marcam presença</p>
+      <button id="btnPerfume">Ver marcas</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop" alt="Cuidados com a pele">
+      <h2>Cuidados com a pele</h2>
+      <p class="card-desc">Pele saudável e radiante</p>
+      <button id="btnSkincare">Ver marcas</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop" alt="Maquiagem">
+      <h2>Maquiagem</h2>
+      <p class="card-desc">Realce a sua beleza natural</p>
+      <button id="btnMaquiagem">Ver marcas</button>
+    </div>
+
+  </div>
+
+  <!-- AQUI VÃO APARECER AS MARCAS -->
+  <div id="marcasContainer"></div>
+
+</section>
+
+<!-- PROMOÇÕES -->
+<section class="container" id="promocoes">
+
+  <h2 class="section-title">Promoções & Descontos</h2>
+
+  <div class="promocoes">
+
+    <div class="promo-card">
+      <div class="promo-badge">-30%</div>
+      <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&h=300&fit=crop" alt="Kit Skincare">
+      <div class="promo-info">
+        <h3>Kit Skincare Completo</h3>
+        <p class="promo-desc">Limpeza + Tônico + Hidratante para todos os tipos de pele</p>
+        <div class="promo-precos">
+          <span class="preco-antigo">R$ 189,90</span>
+          <span class="preco-novo">R$ 132,90</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-card">
+      <div class="promo-badge">-25%</div>
+      <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=300&fit=crop" alt="Perfume Importado">
+      <div class="promo-info">
+        <h3>Perfumes Importados</h3>
+        <p class="promo-desc">Fragrâncias internacionais selecionadas com desconto especial</p>
+        <div class="promo-precos">
+          <span class="preco-antigo">R$ 299,90</span>
+          <span class="preco-novo">R$ 224,90</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-card">
+      <div class="promo-badge">-40%</div>
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop" alt="Kit Maquiagem">
+      <div class="promo-info">
+        <h3>Kit Maquiagem Dia a Dia</h3>
+        <p class="promo-desc">Base + Corretivo + Pó + Máscara para um look completo</p>
+        <div class="promo-precos">
+          <span class="preco-antigo">R$ 249,90</span>
+          <span class="preco-novo">R$ 149,90</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="promo-aviso">* Promoções por tempo limitado. Cadastre-se para receber ofertas exclusivas!</p>
+
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <h2>Contato</h2>
+  <p class="contato-telefone">&#128222; (66) 7890-0012</p>
+  <p class="contato-email">&#9993; contato@essenciabeauty.com</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Essência Beauty - Todos os direitos reservados</p>
+</footer>
+
+<script src="controller.js"></script>
+
+</body>
+</html>
