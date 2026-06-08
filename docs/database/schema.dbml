@@ -1,0 +1,25 @@
+Table usuarios {
+  id integer [primary key]
+  nome varchar(100) [not null]
+  email varchar(254) [not null, unique]
+  telefone varchar(15) [not null]
+  data_nascimento date [not null]
+  genero varchar(20)
+  tipo_pele varchar(20)
+  receber_ofertas boolean
+  data_registro timestamp
+}
+
+Table categorias {
+  id integer [primary key]
+  nome varchar(50) [not null, unique]
+}
+
+Table marcas {
+  id integer [primary key]
+  nome varchar(100) [not null]
+  site varchar(255)
+  categoria_id integer [not null]
+}
+
+Ref: marcas.categoria_id > categorias.id
